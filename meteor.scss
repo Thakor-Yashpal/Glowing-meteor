@@ -1,0 +1,604 @@
+@import 'compass/css3';
+
+/** design not mine. credits to design from dribbble designer MBE.
+here is the link : https://dribbble.com/shots/3345821-Electron.
+Just wanted to animate this because i loved it when i saw it **/
+
+body {
+    overflow: hidden;
+}
+
+$background:#0f111d;
+$color:#fff;
+$color2:#5048A0;
+$color3:#85EDE8;
+$color4:#48098b;
+@function randomNum($min, $max) {
+    $rand: random();
+    $randomNum: $min + floor($rand * (($max - $min) + 1));
+    @return $randomNum;
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{"$animationName"} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-ms-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+body {
+    background: $background
+}
+
+canvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    @include transform(translate(-50%, -50%));
+}
+
+div {
+    width: 100px;
+    height: 85px;
+    @include border-radius(100px 0px 0px 100px);
+    background: $color;
+    box-shadow: 0px 0px 14px $color;
+    @include transform(translate(-50%, -50%));
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    ul {
+        margin: 0;
+        padding: 0;
+        li {
+            list-style: none;
+            display: block;
+        }
+    }
+    &:nth-child(1) {
+        background-color: $color2;
+        height: 130px;
+        width: 145px;
+        box-shadow: 2px 0px 10px $color2, -5px 0px 10px #5b2096;
+        $delay: 0;
+        $duration: 0;
+        @for $i from 1 through 4 {
+            $delay: $delay + 0.2;
+            $width: 0;
+            $duration: $duration+randomNum(0.5, 2.5);
+            li:nth-child(#{$i}) {
+                $width: randomNum(120, 170)+px;
+                width: $width;
+                height: 32.5px;
+                background: $color2;
+                background: linear-gradient(to right, $color2 60%, transparent);
+                margin-left: 70px;
+                border-radius: 80px;
+                @include animation(glowbg 2s ease-in-out infinite);
+                @include animation-delay($delay+s);
+                @include animation-duration($duration+s);
+            }
+        } //end of li for loop
+    }
+    &:nth-child(2) {
+        background-color: $color3;
+        opacity: 0.6;
+        height: 115px;
+        width: 130px;
+        box-shadow: 0px 0px 15px $color3;
+        li:nth-child(1) {
+            width: 170px;
+            background: linear-gradient(to right, $color3 50%, transparent);
+            height: 30px;
+            margin-left: 50px;
+            @include border-radius(200px);
+            @include animation(glowbg 3s ease-in-out infinite);
+            @include animation-delay(.5s);
+        }
+        li:nth-child(2) {
+            width: 160px;
+            background: linear-gradient(to right, $color3 50%, transparent);
+            height: 40px;
+            margin-left: 50px;
+            @include border-radius(200px);
+            margin-top: 45px;
+            @include animation(glowbg 2.5s ease-in-out infinite);
+            @include animation-delay(.8s);
+        }
+    }
+    &:nth-child(3) {
+        background-color: $color3;
+        height: 100px;
+        width: 100px;
+        margin-left: -8px;
+        box-shadow: 0px 0px 15px $color3;
+        li:nth-child(1) {
+            width: 55px;
+            height: 10px;
+            background: $color3;
+            margin-left: 50px;
+            border-radius: 300px;
+            position: relative;
+            left: 0px;
+            @include transition(all 0.3s ease);
+            @include animation(anim1 1s ease infinite)
+        }
+        li:nth-child(2) {
+            width: 90px;
+            height: 10px;
+            background: $color3;
+            margin-left: 50px;
+            border-radius: 300px;
+            position: relative;
+            margin-top: 80px;
+            left: 0px;
+            @include transition(all 0.3s ease);
+            @include animation(anim1 1s ease infinite);
+            @include animation-delay(.5s);
+        }
+        .floating-1 {
+            @extend li: nth-child(1);
+            position: absolute;
+            top: 0;
+            box-shadow: 0px 0px 5px $color3;
+        }
+        .floating-2 {
+            @extend li: nth-child(2);
+            position: absolute;
+            bottom: 0;
+        }
+        li:nth-child(3).floating-1 {
+            width: 40px;
+            left: 65px;
+            @include animation(f1 2s ease-out infinite);
+        }
+        li:nth-child(4).floating-1 {
+            width: 15px;
+            left: 115px;
+            @include animation(f11 1.8s ease-out infinite);
+            @include animation-delay(0s);
+        }
+        li:nth-child(5).floating-2 {
+            width: 30px;
+            left: 0px;
+            @include animation(f11 1s ease-out infinite);
+            @include animation-delay(.3s);
+        }
+        li:nth-child(6).floating-2 {
+            width: 10px;
+            left: 0px;
+            @include animation(f11 1.5s ease-out infinite);
+            @include animation-delay(.5s);
+        }
+    }
+    &:nth-child(4) {
+        width: 80px;
+        margin-left: -10px;
+        height: 80px;
+        span {
+            display: block;
+            position: absolute;
+        }
+        .eyes {
+            width: 10px;
+            height: 10px;
+            border-radius: 100px;
+            background: #000;
+            top: 30px;
+            left: 25px;
+            &::after {
+                content: "";
+                width: 10px;
+                height: 10px;
+                border-radius: 100px;
+                background: #000;
+                position: absolute;
+                left: 28px;
+            }
+        }
+        .smile {
+            position: absolute;
+            border-bottom-left-radius: 90px;
+            border-bottom-right-radius: 90px;
+            width: 10px;
+            height: 6px;
+            background: transparent;
+            border: 4px solid #000;
+            left: 36px;
+            top: 38px;
+            &::before {
+                background: #fff;
+                width: 23px;
+                height: 5px;
+                content: "";
+                position: absolute;
+                left: -5px;
+                top: -5px;
+            }
+        } // end of smile
+        .cheeks {
+            width: 10px;
+            height: 10px;
+            background: $color3;
+            display: block;
+            position: absolute;
+            @include border-radius(200px);
+            top: 40px;
+            left: 20px;
+            &::after {
+                content: "";
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                background: $color3;
+                left: 40px;
+                top: 0px;
+                @include border-radius(200px);
+            }
+        }
+        li {
+            position: relative;
+            @include transition(all 0.2s ease);
+        }
+        li:nth-child(1) {
+            width: 90px;
+            height: 12px;
+            background: #fff;
+            left: 50px;
+            border-radius: 200px;
+            box-shadow: 0px 0px 10px #fff;
+            @include animation(anim2 1.5s ease-out infinite)
+        }
+        li:nth-child(2) {
+            background: radial-gradient(circle at 100% 50%, rgba(204, 0, 0, 0) 4px, #fff 5px);
+            width: 70px;
+            height: 10px;
+            margin-left: 50px;
+            @include animation(anim3 1.6s ease-out infinite);
+            @include animation-delay(0.5s);
+        }
+        li:nth-child(3) {
+            width: 105px;
+            height: 12px;
+            background: #fff;
+            left: 45px;
+            border-radius: 200px;
+            box-shadow: 0px 0px 10px #fff;
+            @include animation(anim2 1.2s ease-out infinite);
+            @include animation-delay(1s);
+        }
+        li:nth-child(4) {
+            background: radial-gradient(circle at 100% 50%, rgba(204, 0, 0, 0) 4px, #fff 5px);
+            ;
+            width: 65px;
+            height: 10px;
+            margin-left: 70px;
+            @include animation(anim3 2s ease-out infinite);
+            @include animation-delay(0.5s);
+        }
+        li:nth-child(5) {
+            width: 85px;
+            height: 12px;
+            background: #fff;
+            left: 60px;
+            border-radius: 200px;
+            box-shadow: 0px 0px 10px #fff;
+            @include animation(anim4 2s ease-out infinite);
+            @include animation-delay(0.5s);
+        }
+        li:nth-child(6) {
+            background: radial-gradient(circle at 100% 50%, rgba(204, 0, 0, 0) 5px, #fff 6px);
+            ;
+            width: 65px;
+            height: 12px;
+            margin-left: 75px;
+            @include animation(anim3 1s ease-out infinite);
+            @include animation-delay(0.5s);
+        }
+        li:nth-child(7) {
+            width: 100px;
+            height: 12px;
+            background: #fff;
+            left: 55px;
+            border-radius: 200px;
+            box-shadow: 0px 0px 10px #fff;
+            @include animation(anim2 1.3s ease-out infinite);
+            @include animation-delay(0.5s);
+        }
+        .floating {
+            position: absolute;
+            background: #fff;
+            border-radius: 100px;
+            @include transition(all 0.5s ease);
+            box-shadow: 0px 0px 10px $color3;
+            z-index: -2;
+            opacity: 0;
+        }
+        li:nth-child(8).floating {
+            width: 12px;
+            height: 12px;
+            top: 0;
+            left: 50px;
+            @include animation(float1 3s ease infinite);
+            @include animation-delay(.4s);
+        }
+        li:nth-child(9).floating {
+            width: 12px;
+            height: 12px;
+            top: 22px;
+            @include animation(float2 3s ease infinite);
+            @include animation-delay(2.5s);
+        }
+        li:nth-child(10).floating {
+            width: 12px;
+            height: 12px;
+            top: 44px;
+            left: 50px;
+            @include animation(float3 3s ease infinite);
+            @include animation-delay(1.5s);
+        }
+        li:nth-child(11).floating {
+            width: 12px;
+            height: 12px;
+            top: 67px;
+            left: 50px;
+            @include animation(float4 3s ease infinite);
+            @include animation-delay(1.5s);
+        }
+    }
+}
+
+.random-stars-container {
+    width: 100%;
+    height: 50%;
+    background: transparent;
+    box-shadow: none;
+    z-index: -1;
+    .random-stars {
+        display: block;
+        position: absolute;
+        opacity: 0;
+        @include animation(stars-moving 2.5s ease infinite);
+    }
+    .random-stars:nth-child(1) {
+        width: 15px;
+        height: 15px;
+        background: linear-gradient(to right, $color4, $color3);
+        @include border-radius(100px);
+        left: 500px;
+        top: 50px;
+        @include animation-delay(.5s);
+        @include animation-duration(2s);
+    }
+    .random-stars:nth-child(2) {
+        width: 10px;
+        height: 10px;
+        background: linear-gradient(to right, $color3 30%, transparent);
+        @include border-radius(100px);
+        left: 0px;
+        top: 80px;
+    }
+    .random-stars:nth-child(3) {
+        width: 10px;
+        height: 10px;
+        background: linear-gradient(to right, $color4 20%, transparent);
+        @include border-radius(100px);
+        left: 0px;
+        top: 130px;
+        @include animation-delay(.8s);
+    }
+    .random-stars:nth-child(4) {
+        width: 12px;
+        height: 12px;
+        background: $color3;
+        @include border-radius(100px);
+        left: 0px;
+        top: 230px;
+        @include animation-delay(.2s);
+        @include animation-duration(3.5s);
+    }
+}
+
+@include keyframes(f1) {
+    0% {
+        left: 15px;
+        width: 70px
+    }
+    50% {
+        left: 150px;
+        opacity: .5;
+        width: 50px
+    }
+    60% {
+        left: 150px;
+        opacity: 0;
+        width: 4px
+    }
+    100% {
+        left: 15px;
+        opacity: 0;
+        width: 0px
+    }
+}
+
+@include keyframes(f11) {
+    0% {
+        left: 65px;
+    }
+    50% {
+        left: 185px;
+        opacity: .5
+    }
+    60% {
+        opacity: 0;
+        left: 185px
+    }
+    100% {
+        left: 65px;
+        opacity: 0
+    }
+}
+
+@include keyframes(anim1) {
+    0% {
+        left: 0px
+    }
+    50% {
+        left: 30px
+    }
+    100% {
+        left: 0xpx
+    }
+}
+
+@include keyframes(anim2) {
+    0% {
+        left: 45px
+    }
+    50% {
+        left: 65px
+    }
+    100% {
+        left: 45px
+    }
+}
+
+@include keyframes(anim3) {
+    0% {
+        left: 0px
+    }
+    50% {
+        left: 5px
+    }
+    100% {
+        left: 0px
+    }
+}
+
+@include keyframes(anim4) {
+    0% {
+        left: 60px
+    }
+    50% {
+        left: 80px
+    }
+    100% {
+        left: 60px
+    }
+}
+
+@include keyframes(float1) {
+    0% {
+        left: 50px;
+        opacity: 0
+    }
+    50% {
+        left: 160px;
+        opacity: 1
+    }
+    70% {
+        left: 160px;
+        opacity: 0
+    }
+    100% {
+        left: 50px;
+        opacity: 0
+    }
+}
+
+@include keyframes(float2) {
+    0% {
+        left: 60px;
+        opacity: 0
+    }
+    50% {
+        left: 175px;
+        opacity: 1
+    }
+    70% {
+        left: 175px;
+        opacity: 0
+    }
+    100% {
+        left: 60px;
+        opacity: 0
+    }
+}
+
+@include keyframes(float3) {
+    0% {
+        left: 50px;
+        opacity: 0
+    }
+    50% {
+        left: 160px;
+        opacity: 1
+    }
+    70% {
+        left: 160px;
+        opacity: 0
+    }
+    100% {
+        left: 50px;
+        opacity: 0
+    }
+}
+
+@include keyframes(float4) {
+    0% {
+        left: 50px;
+        opacity: 0
+    }
+    50% {
+        left: 180px;
+        opacity: 1
+    }
+    70% {
+        left: 180px;
+        opacity: 0
+    }
+    100% {
+        left: 50px;
+        opacity: 0
+    }
+}
+
+@include keyframes(glowbg) {
+    0% {
+        width: 120px
+    }
+    ;
+    25% {
+        width: 200px
+    }
+    100% {
+        width: 120px
+    }
+}
+
+@include keyframes(stars-moving) {
+    0% {
+        left: 0;
+        opacity: 1
+    }
+    50% {
+        left: 100%;
+        opacity: 1
+    }
+    70% {
+        left: 100%;
+        opacity: 0
+    }
+    100% {
+        left: 0;
+        opacity: 0
+    }
+}
